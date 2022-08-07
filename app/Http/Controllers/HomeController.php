@@ -55,9 +55,7 @@ class HomeController extends Controller
    public function Ajax_Post(Request $request)
    {
      $data=explode(",",$request->exampleVariable);//comma separated value converted to array
-     //$data[0]=====>current login user
-     //$data[1]=====>requested user
-     //$data[3]=====> for function type
+     //$data[0] and $data[1] basically sender user id  and reciver user id and data[3] is function  name
      switch($data[3])
      {
         case 'sendRequest':
@@ -78,7 +76,7 @@ class HomeController extends Controller
     //send connection request
     public function send_request($data)
     {
-        
+        //$data[0] and $data[1] basically sender user id  and reciver user id
         $res=UserConnection::create(['user_id'=>$data[0],'friend_id'=>$data[1],'status'=>'pending']);
         if($res)
         {
@@ -92,6 +90,7 @@ class HomeController extends Controller
     //delte connection request
     public function delete_request($data)
     {
+        //$data[0] and $data[1] basically sender user id  and reciver user id
         $res=UserConnection::where(['user_id'=>$data[0],'friend_id'=>$data[1],'send_request'=>'1','status'=>'pending'])->delete();
         if($res)
         {
@@ -105,6 +104,7 @@ class HomeController extends Controller
     //accept request
     public function accept_request($data)
     {
+        //$data[0] and $data[1] basically sender user id  and reciver user id
         $res=UserConnection::where(['user_id'=>$data[1],'friend_id'=>$data[0],'status'=>'pending'])->update(['status'=>'connected']);
         if($res)
         {
@@ -115,9 +115,10 @@ class HomeController extends Controller
         }
     }
 
-    //remove connections
+    //remove connections code 
     public function removeConnection($data)
     {
+        //$data[0] and $data[1] basically sender user id  and reciver user id
         $res=UserConnection::where(['user_id'=>$data[0],'friend_id'=>$data[1],'status'=>'connected'])->orWhere(['user_id'=>$data[1],'friend_id'=>$data[0],'status'=>'connected'])->delete();
         if($res)
         {

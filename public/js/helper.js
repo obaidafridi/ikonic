@@ -37,7 +37,6 @@ function ajax(url, method, form,exampleVariable) {
     dataType: 'json',
     error: function(xhr, textStatus, error) {
       $("#skelton").addClass('d-none');
-       //$(exampleVariable).parent().parent().parent().show();
     },
     success: function(response) {
      if(response.status == 'success')
@@ -50,7 +49,7 @@ function ajax(url, method, form,exampleVariable) {
   });
 }
 
-
+//for post requests only
 function exampleUseOfAjaxFunction(exampleVariable) {
   $("#skelton").removeClass('d-none');
   console.log( $(exampleVariable[2]).parent().parent().parent().html());
@@ -63,6 +62,6 @@ function exampleUseOfAjaxFunction(exampleVariable) {
   
 }
 
-
+//i have not work for get request and load more due to shortage of time =====================================
  //ajax('/connection/' + exampleVariable, 'GET', functionsOnSuccess);
 
